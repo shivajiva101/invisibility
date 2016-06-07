@@ -1,6 +1,17 @@
 
 invisibility = {}
 
+-- reset player invisibility if they go offline
+
+minetest.register_on_leaveplayer(function(player)
+
+	local name = player:get_player_name()
+
+	if invisibility[name] then
+		invisibility[name] = nil
+	end
+end)
+
 -- invisibility potion
 
 minetest.register_node("invisibility:potion", {
@@ -17,7 +28,10 @@ minetest.register_node("invisibility:potion", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.3, 0.25}
 	},
-	groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
+	groups = {
+		vessel = 1, dig_immediate = 3, attached_node = 1,
+		not_in_creative_inventory = 1
+	},
 	sounds = default.node_sound_glass_defaults(),
 
 	on_use = function(itemstack, user)
@@ -50,7 +64,7 @@ minetest.register_node("invisibility:potion", {
 
 			itemstack:take_item()
 
-			return {name="vessels:glass_bottle"} -- itemstack
+			return {name = "vessels:glass_bottle"}
 		end
 
 	end,
