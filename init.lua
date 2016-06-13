@@ -1,6 +1,7 @@
 
 invisibility = {}
 
+minetest.register_privilege('stealth', "Allows you to disappear completely")
 -- reset player invisibility if they go offline
 
 minetest.register_on_leaveplayer(function(player)
@@ -56,7 +57,7 @@ end
 minetest.register_chatcommand("vanish", {
 	params = "<name>",
 	description = "Make player invisible",
-	privs = {server = true},
+	privs = {stealth = true},
 
 	func = function(name, param)
 
