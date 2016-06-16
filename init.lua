@@ -13,18 +13,20 @@ minetest.register_on_leaveplayer(function(player)
 	end
 end)
 
+
 -- invisibility function
-invisible = function(player)
+
+invisible = function(player, toggle)
 
 	if not player then return false end
 
 	local name = player:get_player_name()
 
-	invisibility[name] = not invisibility[name]
+	invisibility[name] = toggle
 
 	local prop
 
-	if invisibility[name] then
+	if toggle == true then
 
 		-- hide player and name tag
 		prop = {
@@ -52,6 +54,7 @@ invisible = function(player)
 end
 
 -- vanish command (admin only)
+
 minetest.register_chatcommand("vanish", {
 	params = "<name>",
 	description = "Make player invisible",
@@ -71,8 +74,15 @@ minetest.register_chatcommand("vanish", {
 			return false, "Player " .. param .. " is not online!"
 		end
 
-		-- hide player entered (default to player using command if blank)
-		invisible( minetest.get_player_by_name(name) )
+		local player = minetest.get_player_by_name(name)
+
+		-- hide / show player
+		if invisibility[name] then
+
+			invisible(player, nil)
+		else
+			invisible(player, true)
+		end
 
 	end
 })
