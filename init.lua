@@ -86,3 +86,8 @@ minetest.register_chatcommand("vanish", {
 
 	end
 })
+
+-- Log
+if minetest.settings:get_bool("log_mods") then
+minetest.log("action", "[MOD] Invisibility loaded")
+end		
