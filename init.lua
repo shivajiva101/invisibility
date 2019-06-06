@@ -41,7 +41,7 @@ invisible = function(player, toggle)
 		-- show player and tag
 		prop = {
 			visual_size = {x = 1, y = 1},
-			collisionbox = {-0.35, -1, -0.35, 0.35, 1, 0.35}
+			collisionbox = {-0.3, 0.0, -0.3, 0.3, 1.7, 0.3}
 		}
 
 		player:set_nametag_attributes({
