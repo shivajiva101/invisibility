@@ -1,0 +1,1 @@
+Allows admins/moderators to make players/themselves invisible.
